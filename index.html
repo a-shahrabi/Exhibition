@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Module - Learn AI the Fun Way!</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>AI Module - Learn AI in 45 Minutes!</h1>
+        </header>
+
+        <nav class="nav-tabs">
+            <button class="tab active" onclick="showTab('intro')">1. What is AI?</button>
+            <button class="tab" onclick="showTab('examples')">2. Surrounded by AI</button>
+            <button class="tab" onclick="showTab('train')">3. Train Your AI</button>
+            <button class="tab" onclick="showTab('share')">4. Share & React</button>
+            <button class="tab" onclick="showTab('discuss')">5. Can AI be Sus?</button>
+        </nav>
+
+        <!-- Section 1: What is AI? (2-3 mins) -->
+        <section id="intro" class="section active">
+            <div class="card">
+                <h2>What is AI? - Artificial Intelligence</h2>
+                <div class="video-box">
+                    <span>Video Player - 2-3 minute intro video</span>
+                </div>
+                <div style="margin-top: 20px;">
+                    <h3>Key Points:</h3>
+                    <ul style="margin: 15px 0; padding-left: 20px;">
+                        <li>AI means making computers smart</li>
+                        <li>It's like teaching computers to think and learn</li>
+                        <li>AI can recognize patterns and make decisions</li>
+                        <li>You already use AI every day without knowing it</li>
+                    </ul>
+                </div>
+                <button class="btn" onclick="showTab('examples')">Next: See AI Everywhere</button>
+            </div>
+        </section>
+
+        <!-- Section 2: Surrounded by AI (5-6 mins) -->
+        <section id="examples" class="section">
+            <div class="card">
+                <h2>AI is Already in Your Life!</h2>
+                <p>Click each app to see how it uses AI:</p>
+                
+                <div class="examples-grid">
+                    <div class="example-item" onclick="alert('TikTok uses AI to learn what videos you like and shows you more similar content!')">
+                        <h4>TikTok</h4>
+                        <p>For You Page</p>
+                    </div>
+                    <div class="example-item" onclick="alert('Instagram Reels uses AI to analyze your interests and keep you scrolling!')">
+                        <h4>Instagram</h4>
+                        <p>Reels & Feed</p>
+                    </div>
+                    <div class="example-item" onclick="alert('Siri uses AI to understand your voice and answer questions!')">
+                        <h4>Siri/Alexa</h4>
+                        <p>Voice Assistant</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="kahoot-box">
+                <h2 style="color: #7B68EE;">KAHOOT QUIZ TIME!</h2>
+                <p style="font-size: 1.2em; margin: 15px 0;">Test your knowledge about AI in everyday life!</p>
+                <p style="font-size: 1.5em; margin: 20px 0; font-weight: bold;">Game PIN: [Teacher will provide]</p>
+                <p>Join at: <strong>kahoot.it</strong></p>
+                <button class="btn" onclick="window.open('https://kahoot.it', '_blank')" style="font-size: 1.2em; padding: 15px 30px;">JOIN KAHOOT NOW</button>
+                <p style="margin-top: 15px; font-style: italic;">Or use the Kahoot app on your phone!</p>
+            </div>
+
+            <div class="card">
+                <h3>Activity: Where's YOUR AI?</h3>
+                <p>List 3 places where YOU use AI in your daily life:</p>
+                <input type="text" placeholder="1. Example: Snapchat filters">
+                <input type="text" placeholder="2. Example: YouTube recommendations">
+                <input type="text" placeholder="3. Example: Auto-correct">
+                <button class="btn" onclick="alert('Great examples! AI really is everywhere!')">Submit</button>
+            </div>
+        </section>
+
+        <!-- Section 3: Train Your AI (15-20 mins) -->
+        <section id="train" class="section">
+            <div class="card">
+                <h2>Time to Build Your Own AI!</h2>
+                <p>We'll use Teachable Machine - a free tool from Google</p>
+                
+                <div class="instructions">
+                    <h3>Instructions:</h3>
+                    <ol style="line-height: 2; margin-left: 20px;">
+                        <li>Go to <a href="https://teachablemachine.withgoogle.com" target="_blank">teachablemachine.withgoogle.com</a></li>
+                        <li>Click "Get Started"</li>
+                        <li>Choose your project type:
+                            <ul style="margin: 10px 0;">
+                                <li>Image Project (recommended for beginners)</li>
+                                <li>Audio Project</li>
+                                <li>Pose Project</li>
+                            </ul>
+                        </li>
+                        <li>Create 2 classes for your model. Ideas:
+                            <ul style="margin: 10px 0;">
+                                <li>Peace sign vs Thumbs up</li>
+                                <li>Happy face vs Sad face</li>
+                                <li>Clap vs Snap (for audio)</li>
+                                <li>Or create your own idea!</li>
+                            </ul>
+                        </li>
+                        <li>Collect at least 20-30 examples for each class</li>
+                        <li>Click "Train Model" and wait</li>
+                        <li>Test your model with the preview</li>
+                        <li>Record a 20-30 second demo showing it working</li>
+                    </ol>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="btn" onclick="alert('Awesome! You just trained an AI!')">
+                        I Trained My AI!
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Share & React (10 mins) -->
+        <section id="share" class="section">
+            <div class="card">
+                <h2>Share Your AI Creation!</h2>
+                <p>Time to show off what you made:</p>
+                
+                <div style="margin: 20px 0;">
+                    <h4>1. Upload Screenshot:</h4>
+                    <button class="btn">Choose File</button>
+                    
+                    <h4 style="margin-top: 20px;">2. What does your AI do?</h4>
+                    <textarea rows="3" placeholder="My AI can recognize... It works by..."></textarea>
+                    
+                    <h4 style="margin-top: 20px;">3. What worked well? What was challenging?</h4>
+                    <textarea rows="3" placeholder="The easiest part was... The hardest part was..."></textarea>
+                    
+                    <h4 style="margin-top: 20px;">4. Add a fun caption or meme about your experience:</h4>
+                    <input type="text" placeholder="Example: When your AI actually works on the first try...">
+                </div>
+                
+                <button class="btn" onclick="alert('Project shared! Check out what others made!')">
+                    Share My Project
+                </button>
+            </div>
+
+            <div class="card">
+                <h3>View Other Projects</h3>
+                <p>Check out what your classmates created! React and comment on their work.</p>
+                <div style="background: #f0f0f0; padding: 20px; border-radius: 5px; text-align: center; color: #666;">
+                    [Padlet board or shared document will be displayed here]
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Can AI be Sus? (5-6 mins) -->
+        <section id="discuss" class="section">
+            <div class="card">
+                <h2>Discussion: Can AI Be Sus?</h2>
+                <p>Let's think critically about AI. Choose a discussion question:</p>
+                
+                <div style="margin: 30px 0;">
+                    <div style="background: #f0f0f0; padding: 20px; margin: 10px 0; border-radius: 5px; cursor: pointer;"
+                         onclick="this.style.background='#e0e0e0'">
+                        <strong>Question 1:</strong> What would you do if AI takes over everything ?
+                    </div>
+                    <div style="background: #f0f0f0; padding: 20px; margin: 10px 0; border-radius: 5px; cursor: pointer;"
+                         onclick="this.style.background='#e0e0e0'">
+                        <strong>Question 2:</strong> Can AI be unfair or bias? Give examples.
+                    </div>
+                    <div style="background: #f0f0f0; padding: 20px; margin: 10px 0; border-radius: 5px; cursor: pointer;"
+                         onclick="this.style.background='#e0e0e0'">
+                        <strong>Question 3:</strong> Should there be rules for AI?
+                    </div>
+                </div>
+                
+                <h4>Your Thoughts:</h4>
+                <textarea rows="4" placeholder="Share your thoughts on the question you chose..."></textarea>
+                <button class="btn" onclick="showCompletion()">Submit My Thoughts</button>
+            </div>
+            
+            <div id="completion" style="display: none; text-align: center; margin-top: 30px;" class="card">
+                <h1>You Completed the AI Module!</h1>
+                <p style="font-size: 1.2em; margin: 20px 0;">You learned what AI is, found it in your daily life, and even trained your own AI model!</p>
+                <button class="btn" onclick="alert('Certificate generated!')">Certificate</button>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
