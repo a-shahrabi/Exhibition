@@ -254,6 +254,12 @@ body::before {
     box-shadow: var(--shadow-lg);
 }
 
+.video-box iframe {
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+}
+
 .video-box::before {
     content: '';
     position: absolute;
@@ -263,6 +269,8 @@ body::before {
     height: 200%;
     background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
     animation: videoShine 3s infinite;
+    pointer-events: none;
+    z-index: -1;
 }
 
 @keyframes videoShine {
