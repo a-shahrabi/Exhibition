@@ -188,9 +188,27 @@
 <div class="card">
 <h3>View Other Projects</h3>
 <p>Check out what your classmates created! React and comment on their work.</p>
-<div style="background: #f0f0f0; padding: 20px; border-radius: 5px; text-align: center; color: #666;">
-    [Padlet board or shared document will be displayed here]
+
+<!-- Padlet Embed Option 1: Direct Embed -->
+<div class="padlet-embed" style="border-radius: 12px; overflow: hidden; margin: 20px 0;">
+    <iframe 
+        src="https://padlet.com/" 
+        frameborder="0" 
+        allow="camera;microphone;geolocation"
+        style="width:100%; height:500px; background:#f0f0f0;">
+    </iframe>
 </div>
+
+<!-- Padlet Option 2: Link Button -->
+<div style="text-align: center; margin-top: 20px;">
+    <a href="https://padlet.com/YOUR_USERNAME/YOUR_PADLET_TITLE" target="_blank" class="btn">
+        <i class="fas fa-external-link-alt"></i> Open Padlet Board
+    </a>
+</div>
+
+<p style="text-align: center; margin-top: 15px; color: #666;">
+    <i class="fas fa-info-circle"></i> Can't see the board? Enable pop-ups or use the button above.
+</p>
 </div>
 </section>
 
