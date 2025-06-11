@@ -1,3 +1,21 @@
+// Update progress dots when changing tabs
+function updateProgressDots(section) {
+    // Get all dots
+    const dots = document.querySelectorAll('.progress-dot');
+    const sections = ['intro', 'examples', 'train', 'share', 'discuss'];
+    const currentIndex = sections.indexOf(section);
+    
+    dots.forEach((dot, index) => {
+        dot.classList.remove('active', 'completed');
+        
+        if (index < currentIndex) {
+            dot.classList.add('completed');
+        } else if (index === currentIndex) {
+            dot.classList.add('active');
+        }
+    });
+}
+
 // Navigation
 function showTab(section) {
     // Hide all sections
@@ -17,13 +35,11 @@ function showTab(section) {
     };
     
     document.querySelectorAll('.tab').forEach(tab => {
-        if (tab.textContent === tabTexts[section]) {
+        if (tab.textContent.includes(tabTexts[section])) {
             tab.classList.add('active');
         }
     });
-}
-
-// Show completion
-function showCompletion() {
-    document.getElementById('completion').style.display = 'block';
+    
+    // Update progress dots
+    updateProgressDots(section);
 }
