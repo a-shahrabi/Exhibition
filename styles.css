@@ -671,3 +671,42 @@ a.btn:hover {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--primary);
 }
+
+/* AI Introduction Styling */
+.intro-content {
+    font-size: 1.1em;
+    line-height: 1.8;
+}
+
+.ai-fact-box {
+    background: linear-gradient(135deg, var(--light) 0%, white 100%);
+    border-left: 4px solid var(--primary);
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 12px;
+}
+
+.ai-fact-box ul {
+    list-style: none;
+    padding: 0;
+}
+
+.ai-fact-box li {
+    padding: 8px 0;
+    font-size: 1.05em;
+}
+
+.fun-fact {
+    background: var(--gradient);
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.fun-fact i {
+    font-size: 2em;
+}
