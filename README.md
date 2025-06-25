@@ -37,3 +37,43 @@ The module is divided into 5 progressive sections:
 
 2. **Create a new folder** on your computer and save all three files inside it
 
+3. **Open the project:**
+   - **Option A:** Use VS Code with Live Server
+     - Open the folder in VS Code
+     - Right-click on `index.html`
+     - Select "Open with Live Server"
+   
+   - **Option B:** Direct browser opening
+     - Navigate to the folder
+     - Double-click `index.html`
+
+## 🎨 Features
+
+### Visual Design
+- Modern gradient backgrounds
+- Smooth animations and transitions
+- Hover effects on all interactive elements
+- Progress indicators
+- Custom color scheme (Purple, Teal, Orange)
+- Google Fonts (Poppins & Inter)
+
+### Interactive Elements
+- Tab-based navigation
+- Video embedding
+- Activity placeholders
+- Padlet integration
+- Font Awesome icons
+- Responsive design for all devices
+
+
+## 🤝 Contributing
+
+Feel free to fork this project and customize it for your classroom needs! Some ideas:
+- Add more interactive games
+- Include additional video resources
+- Create language translations
+- Add assessment quizzes
+
+## 📄 License
+
+This educational module is free to use and modify for educational purposes.
