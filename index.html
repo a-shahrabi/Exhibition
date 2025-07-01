@@ -11,9 +11,9 @@
 <div class="container">
 <header class="header">
 <h1><i class="fas fa-robot"></i> AI Module - Learn AI in 45 Minutes!</h1>
-<!-- <div class="progress-bar">
+<div class="progress-bar">
 <div class="progress-indicator" id="progress"></div>
-</div> -->
+</div>
 </header>
 
 <div class="section-progress">
@@ -42,16 +42,20 @@
 </button>
 </nav>
 
-<!-- Section 1: What is AI? -->
+<!-- Section 1: What is AI? (2-3 mins) -->
 <section id="intro" class="section active">
 <div class="card">
 <h2>What is AI? - Artificial Intelligence</h2>
 <div class="video-box">
-    <a href="https://www.youtube.com/watch?v=JcXKbUIebrU" target="_blank" style="color: white; text-decoration: none;">
-        <i class="fas fa-play-circle" style="font-size: 4em;"></i>
-        <p style="margin-top: 15px; font-size: 1.2em;">Click to Watch: What is AI?</p>
-        <p style="font-size: 0.9em; opacity: 0.8;">2-3 minute intro video</p>
-    </a>
+    <iframe 
+        width="100%" 
+        height="100%" 
+        src="https://www.youtube-nocookie.com/embed/G6de8L7cVvM?rel=0" 
+        title="What is AI? - Introduction Video"
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+    </iframe>
 </div>
 <p style="text-align: center; margin-top: 10px;">
     <a href="https://www.youtube.com/watch?v=G6de8L7cVvM" target="_blank" style="color: var(--primary);">
@@ -71,12 +75,53 @@
 </div>
 </section>
 
-<!-- Section 2: Surrounded by AI -->
+<!-- Section 2: Surrounded by AI (5-6 mins) -->
 <section id="examples" class="section">
 <div class="card">
 <h2>AI is Already in Your Life!</h2>
-<p>Click each app to see how it uses AI:</p>
+<p>Let's explore how AI is all around us every day!</p>
 
+<!-- AI or Human Game -->
+<div class="card" style="margin-top: 30px;">
+<h2 style="color: var(--primary);"><i class="fas fa-gamepad"></i> Game: AI or Human?</h2>
+<p style="font-size: 1.1em; margin-bottom: 20px;">Can you tell the difference? Guess if each example was created by AI or a human!</p>
+
+<div id="ai-game-container">
+    <div id="game-question" class="game-box">
+        <h3 id="question-number">Question 1 of 5</h3>
+        <div id="question-content" class="question-content">
+            <!-- Question will appear here -->
+        </div>
+        
+        <div class="game-buttons">
+            <button class="game-btn ai-btn" onclick="checkAnswer('ai')">
+                <i class="fas fa-robot"></i> AI Made This
+            </button>
+            <button class="game-btn human-btn" onclick="checkAnswer('human')">
+                <i class="fas fa-user"></i> Human Made This
+            </button>
+        </div>
+    </div>
+    
+    <div id="game-result" style="display: none;" class="result-box">
+        <h3 id="result-message"></h3>
+        <p id="result-explanation"></p>
+        <button class="btn" onclick="nextQuestion()">Next Question</button>
+    </div>
+    
+    <div id="game-score" class="score-box">
+        <p>Score: <span id="score">0</span> / <span id="total">0</span></p>
+    </div>
+    
+    <div id="game-over" style="display: none;" class="game-over-box">
+        <h2>Game Complete! 🎉</h2>
+        <p style="font-size: 1.3em;">Your final score: <span id="final-score"></span></p>
+        <p id="score-message" style="font-size: 1.1em; margin: 20px 0;"></p>
+        <button class="btn" onclick="restartGame()">Play Again</button>
+    </div>
+</div>
+</div>
+</div>
 
 <div class="kahoot-box">
 <h2 style="color: #7B68EE;">KAHOOT QUIZ TIME!</h2>
@@ -97,7 +142,7 @@
 </div>
 </section>
 
-<!-- Section 3: Train Your AI -->
+<!-- Section 3: Train Your AI (15-20 mins) -->
 <section id="train" class="section">
 <div class="card">
 <h2>Time to Build Your Own AI!</h2>
@@ -138,7 +183,7 @@
 </div>
 </section>
 
-<!-- Section 4: Share & React -->
+<!-- Section 4: Share & React (10 mins) -->
 <section id="share" class="section">
 <div class="card">
 <h2>Share Your AI Creation!</h2>
@@ -185,12 +230,12 @@
 </div>
 
 <p style="text-align: center; margin-top: 15px; color: #666;">
-    <i class="fas fa-info-circle"></i> If you Can't see the board, Enable pop-ups or use the button above.
+    <i class="fas fa-info-circle"></i> Can't see the board? Enable pop-ups or use the button above.
 </p>
 </div>
 </section>
 
-<!-- Section 5: Can AI be Sus? -->
+<!-- Section 5: Can AI be Sus? (5-6 mins) -->
 <section id="discuss" class="section">
 <div class="card">
 <h2>Discussion: Can AI Be Sus?</h2>
