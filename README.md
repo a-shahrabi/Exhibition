@@ -1,4 +1,4 @@
-# AI Learning Module for Middle School Students 🤖
+# AI Learning Module for Middle School Students 
 
 An interactive, engaging web-based module designed to teach 8th graders about Artificial Intelligence in just 45 minutes. This colorful, modern educational tool makes learning about AI fun and accessible.
 
