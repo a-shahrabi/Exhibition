@@ -21,6 +21,14 @@ The module is divided into 5 progressive sections:
 4. **Share & React** - Collaborative sharing via Padlet
 5. **Can AI be Sus?** - Critical thinking about AI's impact
 
+## 💻 Technologies Used
+
+- **HTML5** - Semantic structure and content
+- **CSS3** - Modern styling with Flexbox and Grid
+- **Vanilla JavaScript** - Interactive functionality without dependencies
+- **Font Awesome** - Icon library
+- **Google Fonts** - Typography (Poppins & Inter)
+
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -65,6 +73,53 @@ The module is divided into 5 progressive sections:
 - Font Awesome icons
 - Responsive design for all devices
 
+## 📱 Browser Compatibility
+
+- ✅ Chrome (recommended)
+- ✅ Firefox
+- ✅ Safari
+- ✅ Edge
+- ✅ Mobile browsers (iOS Safari, Chrome Mobile)
+
+## 📊 Learning Objectives
+
+Students will be able to:
+- Define artificial intelligence in their own words
+- Identify AI applications in their daily lives
+- Create a simple AI model using Teachable Machine
+- Discuss ethical implications of AI technology
+- Think critically about AI's impact on society
+
+## 🛠️ Customization Guide
+
+### Changing Colors
+Edit the CSS variables in `styles.css`:
+```css
+:root {
+  --primary-color: #667eea;
+  --secondary-color: #48bb78;
+  /* Update other color variables as needed */
+}
+```
+
+### Adding New Sections
+1. Add a new tab button in `index.html`
+2. Create corresponding content section
+3. Update navigation in `script.js`
+
+## 🔗 External Resources
+
+- [Google Teachable Machine](https://teachablemachine.withgoogle.com/) - For AI training activity
+- [Padlet](https://padlet.com/) - For collaborative sharing
+- Educational videos embedded within the module
+
+## 🐛 Future Improvements
+
+- [ ] Add offline capability for classroom use
+- [ ] Include teacher dashboard for progress tracking
+- [ ] Create printable worksheets and activities
+- [ ] Add more interactive AI examples
+- [ ] Implement quiz functionality with scoring
 
 ## 🤝 Contributing
 
@@ -77,3 +132,9 @@ Feel free to fork this project and customize it for your classroom needs! Some i
 ## 📄 License
 
 This educational module is free to use and modify for educational purposes.
+
+## 🙏 Acknowledgments
+
+- Developed for the Canadian Multicultural Inventors Museum
+- Special thanks to educators who provided valuable feedback
+- Inspired by the need to make AI education accessible to young learners
