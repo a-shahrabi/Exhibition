@@ -17,10 +17,23 @@ function showTab(section) {
     };
     
     document.querySelectorAll('.tab').forEach(tab => {
-        if (tab.textContent === tabTexts[section]) {
+        if (tab.textContent.trim() === tabTexts[section]) {
             tab.classList.add('active');
         }
     });
+    
+    // Update progress dots
+    document.querySelectorAll('.progress-dot').forEach(dot => {
+        dot.classList.remove('active');
+        if (dot.dataset.section === section) {
+            dot.classList.add('active');
+        }
+    });
+    
+    // Update progress bar
+    const sectionIndex = Object.keys(tabTexts).indexOf(section);
+    const progressPercentage = ((sectionIndex + 1) / Object.keys(tabTexts).length) * 100;
+    document.getElementById('progress').style.width = progressPercentage + '%';
 }
 
 // Show completion
@@ -78,9 +91,13 @@ let totalAnswered = 0;
 
 // Initialize game
 function initGame() {
+    // Shuffle questions for variety
+    gameQuestions.sort(() => Math.random() - 0.5);
     currentQuestion = 0;
     score = 0;
     totalAnswered = 0;
+    document.getElementById('score').textContent = '0';
+    document.getElementById('total').textContent = '0';
     showQuestion();
 }
 
@@ -171,7 +188,7 @@ function restartGame() {
 
 // Start game when page loads
 document.addEventListener('DOMContentLoaded', function() {
-    // Check if we're on the examples section
+    // Initialize the game when page loads
     if (document.getElementById('ai-game-container')) {
         initGame();
     }
