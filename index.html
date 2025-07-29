@@ -6,9 +6,11 @@
     <title>AI Module - Learn AI the Fun Way!</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <script src="config.js"></script>
 </head>
 <body>
-    <div class="container">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div class="container" id="main-content">
         <header class="header">
             <h1><i class="fas fa-robot"></i> AI Module - Learn AI in 45 Minutes!</h1>
             <div class="progress-bar">
@@ -24,26 +26,26 @@
             <div class="progress-dot" data-section="discuss"></div>
         </div>
 
-        <nav class="nav-tabs">
-            <button class="tab active" onclick="showTab('intro')">
-                <span><i class="fas fa-book"></i> 1. What is AI?</span>
+        <nav class="nav-tabs" role="tablist">
+            <button class="tab active" onclick="showTab('intro')" role="tab" aria-selected="true" aria-controls="intro-panel">
+                <span><i class="fas fa-book" aria-hidden="true"></i> 1. What is AI?</span>
             </button>
-            <button class="tab" onclick="showTab('examples')">
-                <span><i class="fas fa-globe"></i> 2. Surrounded by AI</span>
+            <button class="tab" onclick="showTab('examples')" role="tab" aria-selected="false" aria-controls="examples-panel">
+                <span><i class="fas fa-globe" aria-hidden="true"></i> 2. Surrounded by AI</span>
             </button>
-            <button class="tab" onclick="showTab('train')">
-                <span><i class="fas fa-graduation-cap"></i> 3. Train Your AI</span>
+            <button class="tab" onclick="showTab('train')" role="tab" aria-selected="false" aria-controls="train-panel">
+                <span><i class="fas fa-graduation-cap" aria-hidden="true"></i> 3. Train Your AI</span>
             </button>
-            <button class="tab" onclick="showTab('share')">
-                <span><i class="fas fa-share-alt"></i> 4. Share & React</span>
+            <button class="tab" onclick="showTab('share')" role="tab" aria-selected="false" aria-controls="share-panel">
+                <span><i class="fas fa-share-alt" aria-hidden="true"></i> 4. Share & React</span>
             </button>
-            <button class="tab" onclick="showTab('discuss')">
-                <span><i class="fas fa-comments"></i> 5. Can AI be Sus?</span>
+            <button class="tab" onclick="showTab('discuss')" role="tab" aria-selected="false" aria-controls="discuss-panel">
+                <span><i class="fas fa-comments" aria-hidden="true"></i> 5. Can AI be Sus?</span>
             </button>
         </nav>
 
         <!-- Section 1: What is AI? (2-3 mins) -->
-        <section id="intro" class="section active">
+        <section id="intro" class="section active" role="tabpanel" aria-labelledby="intro-panel">
             <div class="card">
                 <h2>What is AI? - Artificial Intelligence</h2>
                 <div class="video-box">
@@ -73,11 +75,13 @@
                 </div>
             </div>
 
-            
             <div class="kahoot-box">
                 <h2 style="color: #7B68EE;">KAHOOT QUIZ TIME!</h2>
                 <p style="font-size: 1.2em; margin: 15px 0;">Test your knowledge about AI in everyday life!</p>
-                <p style="font-size: 1.5em; margin: 20px 0; font-weight: bold;">Game PIN: [Teacher will provide]</p>
+                <div style="margin: 10px 0;">
+                    <label for="game-pin" style="font-weight:bold;">Game PIN:</label>
+                    <input id="game-pin" type="text" placeholder="Enter your Game PIN here (ask teacher)" aria-label="Game PIN" style="max-width: 200px; text-align:center;">
+                </div>
                 <p>Join at: <strong>kahoot.it</strong></p>
                 <button class="btn" onclick="window.open('https://kahoot.it', '_blank')" style="font-size: 1.2em; padding: 15px 30px;">JOIN KAHOOT NOW</button>
                 <p style="margin-top: 15px; font-style: italic;">Or use the Kahoot app on your phone!</p>
@@ -89,29 +93,22 @@
         </section>
 
         <!-- Section 2: Surrounded by AI (5-6 mins) -->
-        <section id="examples" class="section">
+        <section id="examples" class="section" role="tabpanel" aria-labelledby="examples-panel">
             <div class="card">
                 <h2>AI is Already in Your Life!</h2>
                 <p>Let's explore how AI is all around us in ways you might not expect!</p>
             </div>
 
-            <!-- "Game Time: AI or Human?" MOVED HERE -->
             <div class="card">
                 <h2>🎮 Game Time: AI or Human?</h2>
                 <p>Can you tell the difference between AI and human creations? Let's test your skills!</p>
-                
                 <div class="score-box">
                     Score: <span id="score">0</span> / <span id="total">0</span>
                 </div>
-
-                <!-- Game Container -->
                 <div id="ai-game-container">
-                    <!-- Question Display -->
                     <div id="game-question" class="game-box">
                         <h3 id="question-number">Question 1 of 5</h3>
-                        <div id="question-content" class="question-content">
-                            <!-- Question text will appear here -->
-                        </div>
+                        <div id="question-content" class="question-content"></div>
                         <div class="game-buttons">
                             <button class="game-btn ai-btn" onclick="checkAnswer('ai')">
                                 <i class="fas fa-robot"></i>
@@ -123,15 +120,11 @@
                             </button>
                         </div>
                     </div>
-
-                    <!-- Result Display -->
                     <div id="game-result" class="result-box" style="display: none;">
                         <h3 id="result-message"></h3>
                         <p id="result-explanation"></p>
                         <button class="btn" onclick="nextQuestion()">Next Question →</button>
                     </div>
-
-                    <!-- Game Over Display -->
                     <div id="game-over" class="game-over-box" style="display: none;">
                         <h2>🎉 Game Complete!</h2>
                         <p id="final-score" style="font-size: 1.5em; margin: 20px 0;"></p>
@@ -140,28 +133,28 @@
                     </div>
                 </div>
             </div>
-            <!-- END GAME CARD -->
 
             <div class="card">
-                <h3>Activity: Where's YOUR AI?</h3>
-                <p>List 3 places where YOU use AI in your daily life:</p>
-                <input type="text" placeholder="1. Example: Snapchat filters">
-                <input type="text" placeholder="2. Example: YouTube recommendations">
-                <input type="text" placeholder="3. Example: Auto-correct">
-                <button class="btn" onclick="alert('Great examples! AI really is everywhere!')">Submit</button>
+                <form id="ai-everywhere-form">
+                    <h3>Activity: Where's YOUR AI?</h3>
+                    <p>List 3 places where YOU use AI in your daily life:</p>
+                    <input type="text" placeholder="1. Example: Snapchat filters" aria-label="AI Example 1" name="ai1">
+                    <input type="text" placeholder="2. Example: YouTube recommendations" aria-label="AI Example 2" name="ai2">
+                    <input type="text" placeholder="3. Example: Auto-correct" aria-label="AI Example 3" name="ai3">
+                    <button type="button" class="btn" onclick="validateAndSubmit('ai-everywhere-form')">Submit</button>
+                </form>
             </div>
         </section>
 
         <!-- Section 3: Train Your AI (15-20 mins) -->
-        <section id="train" class="section">
+        <section id="train" class="section" role="tabpanel" aria-labelledby="train-panel">
             <div class="card">
                 <h2>Time to Build Your Own AI!</h2>
                 <p>We'll use Teachable Machine - a free tool from Google</p>
-                
                 <div class="instructions">
                     <h3>Instructions:</h3>
                     <ol style="line-height: 2; margin-left: 20px;">
-                        <li>Go to <a href="https://teachablemachine.withgoogle.com" target="_blank">teachablemachine.withgoogle.com</a></li>
+                        <li>Go to <a href="#" id="teachable-link" target="_blank">teachablemachine.withgoogle.com</a></li>
                         <li>Click "Get Started"</li>
                         <li>Choose your project type:
                             <ul style="margin: 10px 0;">
@@ -184,9 +177,8 @@
                         <li>Record a 20-30 second demo showing it working</li>
                     </ol>
                 </div>
-                
                 <div style="text-align: center; margin-top: 30px;">
-                    <button class="btn" onclick="alert('Awesome! You just trained an AI!')">
+                    <button class="btn" onclick="showLoadingState('Training your AI model...'); setTimeout(() => { hideLoadingState(); showToast('Awesome! You just trained an AI!') }, 2000);">
                         I Trained My AI!
                     </button>
                 </div>
@@ -194,51 +186,43 @@
         </section>
 
         <!-- Section 4: Share & React (10 mins) -->
-        <section id="share" class="section">
+        <section id="share" class="section" role="tabpanel" aria-labelledby="share-panel">
             <div class="card">
-                <h2>Share Your AI Creation!</h2>
-                <p>Time to show off what you made:</p>
-                
-                <div style="margin: 20px 0;">
-                    <h4>1. Upload Screenshot:</h4>
-                    <button class="btn">Choose File</button>
-                    
-                    <h4 style="margin-top: 20px;">2. What does your AI do?</h4>
-                    <textarea rows="3" placeholder="My AI can recognize... It works by..."></textarea>
-                    
-                    <h4 style="margin-top: 20px;">3. What worked well? What was challenging?</h4>
-                    <textarea rows="3" placeholder="The easiest part was... The hardest part was..."></textarea>
-                    
-                    <h4 style="margin-top: 20px;">4. Add a fun caption or meme about your experience:</h4>
-                    <input type="text" placeholder="Example: When your AI actually works on the first try...">
-                </div>
-                
-                <button class="btn" onclick="alert('Project shared! Check out what others made!')">
-                    Share My Project
-                </button>
+                <form id="share-form">
+                    <h2>Share Your AI Creation!</h2>
+                    <p>Time to show off what you made:</p>
+                    <div style="margin: 20px 0;">
+                        <h4>1. Upload Screenshot:</h4>
+                        <button class="btn" type="button">Choose File</button>
+                        <h4 style="margin-top: 20px;">2. What does your AI do?</h4>
+                        <textarea rows="3" placeholder="My AI can recognize... It works by..." name="aiDesc"></textarea>
+                        <h4 style="margin-top: 20px;">3. What worked well? What was challenging?</h4>
+                        <textarea rows="3" placeholder="The easiest part was... The hardest part was..." name="aiReflection"></textarea>
+                        <h4 style="margin-top: 20px;">4. Add a fun caption or meme about your experience:</h4>
+                        <input type="text" placeholder="Example: When your AI actually works on the first try..." name="aiCaption">
+                    </div>
+                    <button type="button" class="btn" onclick="validateAndSubmit('share-form')">
+                        Share My Project
+                    </button>
+                </form>
             </div>
-
             <div class="card">
                 <h3>View Other Projects</h3>
                 <p>Check out what your classmates created! React and comment on their work.</p>
-                
-                <!-- Padlet Embed Option 1: Direct Embed -->
                 <div class="padlet-embed" style="border-radius: 12px; overflow: hidden; margin: 20px 0;">
                     <iframe 
-                        src="https://padlet.com/embed/YOUR_PADLET_ID" 
+                        id="padlet-iframe"
+                        src="" 
                         frameborder="0" 
                         allow="camera;microphone;geolocation"
                         style="width:100%; height:500px; background:#f0f0f0;">
                     </iframe>
                 </div>
-                
-                <!-- Padlet Option 2: Link Button -->
                 <div style="text-align: center; margin-top: 20px;">
-                    <a href="https://padlet.com/YOUR_USERNAME/YOUR_PADLET_TITLE" target="_blank" class="btn">
+                    <a id="padlet-link" href="#" target="_blank" class="btn">
                         <i class="fas fa-external-link-alt"></i> Open Padlet Board
                     </a>
                 </div>
-                
                 <p style="text-align: center; margin-top: 15px; color: #666;">
                     <i class="fas fa-info-circle"></i> Can't see the board? Enable pop-ups or use the button above.
                 </p>
@@ -246,11 +230,10 @@
         </section>
 
         <!-- Section 5: Can AI be Sus? (5-6 mins) -->
-        <section id="discuss" class="section">
+        <section id="discuss" class="section" role="tabpanel" aria-labelledby="discuss-panel">
             <div class="card">
                 <h2>Discussion: Can AI Be Sus?</h2>
                 <p>Let's think critically about AI. Choose a discussion question:</p>
-                
                 <div style="margin: 30px 0;">
                     <div style="background: #f0f0f0; padding: 20px; margin: 10px 0; border-radius: 5px; cursor: pointer;"
                          onclick="this.style.background='#e0e0e0'">
@@ -265,12 +248,10 @@
                         <strong>Question 3:</strong> Should there be rules for AI? Who should make them?
                     </div>
                 </div>
-                
                 <h4>Your Thoughts:</h4>
-                <textarea rows="4" placeholder="Share your thoughts on the question you chose..."></textarea>
+                <textarea rows="4" placeholder="Share your thoughts on the question you chose..." name="discussion"></textarea>
                 <button class="btn" onclick="showCompletion()">Submit My Thoughts</button>
             </div>
-            
             <div id="completion" style="display: none; text-align: center; margin-top: 30px;" class="card">
                 <h1>Congratulations! You Completed the AI Module!</h1>
                 <p style="font-size: 1.2em; margin: 20px 0;">You learned what AI is, found it in your daily life, and even trained your own AI model!</p>
@@ -278,7 +259,6 @@
             </div>
         </section>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
