@@ -1,195 +1,217 @@
-// Navigation
+// ----- Config Values -----
+const PADLET_ID = (window.CONFIG && CONFIG.PADLET_ID) || '';
+const PADLET_URL = (window.CONFIG && CONFIG.PADLET_URL) || '';
+const TEACHABLE_MACHINE_URL = (window.CONFIG && CONFIG.TEACHABLE_MACHINE_URL) || 'https://teachablemachine.withgoogle.com';
+
+// Padlet URL updates
+window.addEventListener('DOMContentLoaded', () => {
+    const padletIframe = document.getElementById('padlet-iframe');
+    const padletLink = document.getElementById('padlet-link');
+    const teachableLink = document.getElementById('teachable-link');
+    if (padletIframe && PADLET_ID) padletIframe.src = `https://padlet.com/embed/${PADLET_ID}`;
+    if (padletLink && PADLET_URL) padletLink.href = PADLET_URL;
+    if (teachableLink && TEACHABLE_MACHINE_URL) teachableLink.href = TEACHABLE_MACHINE_URL;
+});
+
+// ----- Navigation State Management -----
 function showTab(section) {
-    // Hide all sections
+    // Hide all
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    document.getElementById(section).classList.add('active');
-    
-    // Update tabs
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    
-    // Find the correct tab to activate
-    const tabTexts = {
-        'intro': '1. What is AI?',
-        'examples': '2. Surrounded by AI',
-        'train': '3. Train Your AI',
-        'share': '4. Share & React',
-        'discuss': '5. Can AI be Sus?'
-    };
-    
-    document.querySelectorAll('.tab').forEach(tab => {
-        if (tab.textContent.trim() === tabTexts[section]) {
-            tab.classList.add('active');
-        }
-    });
-    
-    // Update progress dots
+
+    // Show current
+    document.getElementById(section).classList.add('active');
+    const tabs = document.querySelectorAll('.tab');
+    tabs[NavigationModule.sections.indexOf(section)].classList.add('active');
+
+    // Progress UI
     document.querySelectorAll('.progress-dot').forEach(dot => {
         dot.classList.remove('active');
-        if (dot.dataset.section === section) {
-            dot.classList.add('active');
-        }
+        dot.classList.remove('completed');
     });
-    
-    // Update progress bar
-    const sectionIndex = Object.keys(tabTexts).indexOf(section);
-    const progressPercentage = ((sectionIndex + 1) / Object.keys(tabTexts).length) * 100;
-    document.getElementById('progress').style.width = progressPercentage + '%';
+    NavigationModule.sections.forEach((s, idx) => {
+        const dot = document.querySelector(`.progress-dot[data-section="${s}"]`);
+        if (!dot) return;
+        if (s === section) dot.classList.add('active');
+        if (NavigationModule.completedSections.includes(s)) dot.classList.add('completed');
+    });
+
+    // Save state
+    sessionStorage.setItem('currentSection', section);
+    sessionStorage.setItem('completedSections', JSON.stringify(NavigationModule.completedSections));
+    Analytics.trackSectionStart(section);
 }
-
-// Show completion
-function showCompletion() {
-    document.getElementById('completion').style.display = 'block';
+function getCompletedSections() {
+    return NavigationModule.completedSections;
 }
-
-// AI or Human Game
-const gameQuestions = [
-    {
-        content: "Roses are red, violets are blue, sugar is sweet, and so are you!",
-        answer: "human",
-        explanation: "This is a classic human poem that's been around for centuries! Humans love simple rhymes."
-    },
-    {
-        content: "The ethereal moonlight cascaded through crystalline dewdrops, creating a symphony of luminescent whispers.",
-        answer: "ai",
-        explanation: "AI often uses fancy words that don't quite make sense together. 'Luminescent whispers'? That's typical AI!"
-    },
-    {
-        content: "OMG this pizza is literally fire 🔥🔥🔥 no cap fr fr",
-        answer: "human",
-        explanation: "This is how real people (especially young people) text! AI struggles with modern slang and emojis."
-    },
-    {
-        content: "To optimize your productivity, integrate systematic methodologies while leveraging synergistic paradigms.",
-        answer: "ai",
-        explanation: "AI loves using business buzzwords that sound smart but don't really mean anything!"
-    },
-    {
-        content: "My dog ate my homework. I know it sounds fake but it actually happened!",
-        answer: "human",
-        explanation: "This is a classic human excuse! The self-aware 'I know it sounds fake' is very human."
-    },
-    {
-        content: "In the quantum realm of possibilities, where dreams intertwine with binary sequences, consciousness emerges.",
-        answer: "ai",
-        explanation: "AI often mixes random tech/science words to sound deep. Quantum + binary + consciousness = definitely AI!"
-    },
-    {
-        content: "Just burned my toast again. Why am I like this? 😭",
-        answer: "human",
-        explanation: "Real human frustration! The self-deprecating humor and crying emoji are very human."
-    },
-    {
-        content: "The majestic elephant gracefully danced upon the velvet clouds of imagination.",
-        answer: "ai",
-        explanation: "AI creates impossible scenarios with flowery language. Elephants don't dance on clouds!"
-    }
-];
-
-let currentQuestion = 0;
-let score = 0;
-let totalAnswered = 0;
-
-// Initialize game
-function initGame() {
-    // Shuffle questions for variety
-    gameQuestions.sort(() => Math.random() - 0.5);
-    currentQuestion = 0;
-    score = 0;
-    totalAnswered = 0;
-    document.getElementById('score').textContent = '0';
-    document.getElementById('total').textContent = '0';
-    showQuestion();
-}
-
-// Show current question
-function showQuestion() {
-    if (currentQuestion >= 5) { // Show only 5 questions per game
-        endGame();
-        return;
-    }
-    
-    const question = gameQuestions[currentQuestion];
-    document.getElementById('question-number').textContent = `Question ${currentQuestion + 1} of 5`;
-    document.getElementById('question-content').textContent = question.content;
-    document.getElementById('game-question').style.display = 'block';
-    document.getElementById('game-result').style.display = 'none';
-}
-
-// Check answer
-function checkAnswer(userAnswer) {
-    const question = gameQuestions[currentQuestion];
-    const isCorrect = userAnswer === question.answer;
-    
-    totalAnswered++;
-    if (isCorrect) {
-        score++;
-    }
-    
-    // Update score display
-    document.getElementById('score').textContent = score;
-    document.getElementById('total').textContent = totalAnswered;
-    
-    // Show result
-    const resultBox = document.getElementById('game-result');
-    resultBox.className = isCorrect ? 'result-box correct' : 'result-box incorrect';
-    document.getElementById('result-message').textContent = isCorrect ? '✅ Correct!' : '❌ Not quite!';
-    document.getElementById('result-explanation').textContent = question.explanation;
-    
-    document.getElementById('game-question').style.display = 'none';
-    resultBox.style.display = 'block';
-}
-
-// Next question
-function nextQuestion() {
-    currentQuestion++;
-    showQuestion();
-}
-
-// End game
-function endGame() {
-    const percentage = Math.round((score / 5) * 100);
-    let message = '';
-    
-    if (percentage === 100) {
-        message = "Perfect! You're an AI detection expert! 🏆";
-    } else if (percentage >= 80) {
-        message = "Great job! You really understand AI! 🌟";
-    } else if (percentage >= 60) {
-        message = "Good work! You're learning to spot AI! 👍";
-    } else {
-        message = "Nice try! AI can be tricky to spot! Keep learning! 📚";
-    }
-    
-    document.getElementById('final-score').textContent = `${score} out of 5 (${percentage}%)`;
-    document.getElementById('score-message').textContent = message;
-    document.getElementById('game-question').style.display = 'none';
-    document.getElementById('game-result').style.display = 'none';
-    document.getElementById('game-over').style.display = 'block';
-}
-
-// Restart game
-function restartGame() {
-    // Shuffle questions for variety
-    gameQuestions.sort(() => Math.random() - 0.5);
-    
-    // Reset game
-    currentQuestion = 0;
-    score = 0;
-    totalAnswered = 0;
-    
-    // Reset display
-    document.getElementById('score').textContent = '0';
-    document.getElementById('total').textContent = '0';
-    document.getElementById('game-over').style.display = 'none';
-    
-    // Start again
-    showQuestion();
-}
-
-// Start game when page loads
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize the game when page loads
-    if (document.getElementById('ai-game-container')) {
-        initGame();
+    // Restore tab
+    let savedSection = sessionStorage.getItem('currentSection');
+    let completedSections = JSON.parse(sessionStorage.getItem('completedSections') || '[]');
+    NavigationModule.completedSections = completedSections;
+    if (savedSection && document.getElementById(savedSection)) {
+        showTab(savedSection);
     }
 });
+
+// ----- Navigation Module -----
+const NavigationModule = {
+    sections: ['intro', 'examples', 'train', 'share', 'discuss'],
+    completedSections: [],
+    attachEventListeners() {
+        // Add listeners for tab progress tracking
+        this.sections.forEach(section => {
+            const btn = document.querySelector(`.tab[onclick="showTab('${section}')"]`);
+            if (btn) {
+                btn.addEventListener('click', () => {
+                    if (!this.completedSections.includes(section)) {
+                        this.completedSections.push(section);
+                        sessionStorage.setItem('completedSections', JSON.stringify(this.completedSections));
+                    }
+                    Analytics.trackSectionStart(section);
+                });
+            }
+        });
+    }
+};
+NavigationModule.attachEventListeners();
+
+// ----- Analytics -----
+const Analytics = {
+    startTime: {},
+    trackSectionStart(section) {
+        this.startTime[section] = Date.now();
+    },
+    trackSectionComplete(section) {
+        const duration = Date.now() - (this.startTime[section] || Date.now());
+        // Example: send to analytics, here just console log
+        console.log(`Section ${section} completed in ${duration / 1000}s`);
+        if (window.CONFIG && CONFIG.ANALYTICS_ENABLED) {
+            localStorage.setItem(`time_${section}`, duration);
+        }
+    }
+};
+
+// ----- Toast Notifications -----
+function showToast(message, type = 'success') {
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.classList.add('show'), 100);
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
+// ----- Loading State -----
+function showLoadingState(message) {
+    const loader = document.createElement('div');
+    loader.className = 'loading-overlay';
+    loader.innerHTML = `
+        <div class="loading-content">
+            <div class="loading"></div>
+            <p>${message}</p>
+        </div>
+    `;
+    document.body.appendChild(loader);
+}
+function hideLoadingState() {
+    const loader = document.querySelector('.loading-overlay');
+    if (loader) loader.remove();
+}
+
+// ----- Form Validation -----
+function validateAndSubmit(formId) {
+    const form = document.getElementById(formId);
+    if (!form) return;
+    const inputs = form.querySelectorAll('input[type="text"], textarea');
+    let isValid = true;
+    inputs.forEach(input => {
+        if (input.value.trim() === '') {
+            input.style.borderColor = '#ef4444';
+            isValid = false;
+        } else {
+            input.style.borderColor = 'transparent';
+        }
+    });
+    if (isValid) {
+        showToast('Great examples! AI really is everywhere!', 'success');
+        form.reset();
+    } else {
+        showToast('Please fill in all fields', 'error');
+    }
+}
+
+// ----- Game Logic Modularized -----
+const gameQuestions = [
+    // Fill with real data, add .difficulty property for each: 'easy', 'medium', 'hard'
+    { text: "This painting was made by an AI. True or False?", answer: "ai", explanation: "AI can create realistic art!", difficulty: "easy" },
+    { text: "This poem is by a human. True or False?", answer: "human", explanation: "It's tough, but humans write with unique emotion!", difficulty: "medium" },
+    // Add more questions...
+];
+const GameModule = {
+    questions: gameQuestions,
+    currentQuestion: 0,
+    score: 0,
+    timer: null,
+    difficulty: 'easy',
+    init() {
+        this.shuffle();
+        this.render();
+    },
+    shuffle() {
+        this.questions.sort(() => Math.random() - 0.5);
+    },
+    render() {
+        // Rendering logic for current question
+    },
+    startTimer() {
+        let timeLeft = 30;
+        clearInterval(this.timer);
+        this.timer = setInterval(() => {
+            timeLeft--;
+            const timerElem = document.getElementById('timer');
+            if (timerElem) timerElem.textContent = timeLeft;
+            if (timeLeft <= 0) {
+                clearInterval(this.timer);
+                checkAnswer(null); // Time's up
+            }
+        }, 1000);
+    }
+};
+
+// ----- Error Handling in Game -----
+function checkAnswer(userAnswer) {
+    try {
+        const question = gameQuestions[GameModule.currentQuestion];
+        if (!question) throw new Error('Question not found');
+        // Game logic: compare userAnswer, update UI
+        // Example:
+        if (userAnswer === question.answer) {
+            showToast('Correct!', 'success');
+            GameModule.score++;
+        } else {
+            showToast('Oops! Try again.', 'error');
+        }
+        // Advance game, update UI, etc.
+    } catch (error) {
+        console.error('Game error:', error);
+        showToast('Something went wrong. Please try again.', 'error');
+    }
+}
+
+// ----- Show Completion -----
+function showCompletion() {
+    document.getElementById('completion').style.display = 'block';
+    showToast("Module completed! 🎉", 'success');
+}
+
+// For accessibility: Keyboard tab navigation
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Tab') {
+        document.body.classList.add('user-is-tabbing');
+    }
+});
+
