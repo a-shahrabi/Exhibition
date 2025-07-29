@@ -780,7 +780,7 @@ a.btn:hover {
     background: var(--primary);
 }
 
-/* --- Additions for UI/UX, Toast, Loader, Skip-Link --- */
+/* --- Additions for UI/UX, Toast, Loader --- */
 .toast {
     position: fixed;
     bottom: 20px;
