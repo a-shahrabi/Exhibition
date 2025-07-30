@@ -8,6 +8,14 @@
     <link rel="stylesheet" href="styles.css">
     <script src="config.js"></script>
 </head>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script>
+  const supabaseUrl = 'YOUR_PROJECT_URL';
+  const supabaseKey = 'YOUR_ANON_PUBLIC_KEY';
+  const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+</script>
+
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="container" id="main-content">
