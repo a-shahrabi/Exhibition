@@ -856,3 +856,12 @@ a.btn:hover {
 @media (hover: none) {
     .btn:active, .tab:active { transform: scale(0.98); }
 }
+
+.post-card {
+    background: #fff;
+    border-radius: 10px;
+    margin: 10px 0;
+    padding: 1em;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  }
+  
