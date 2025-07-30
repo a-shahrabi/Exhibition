@@ -1,4 +1,10 @@
 // ----- Config Values -----
+
+// --*--
+const supabaseUrl = 'YOUR_PROJECT_URL';
+const supabaseKey = 'YOUR_ANON_PUBLIC_KEY';
+const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
 const PADLET_ID = (window.CONFIG && CONFIG.PADLET_ID) || '';
 const PADLET_URL = (window.CONFIG && CONFIG.PADLET_URL) || '';
 const TEACHABLE_MACHINE_URL = (window.CONFIG && CONFIG.TEACHABLE_MACHINE_URL) || 'https://teachablemachine.withgoogle.com';
