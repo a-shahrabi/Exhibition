@@ -1,10 +1,11 @@
 // ----- Config Values -----
 
-// --*--
+// SUPABASE INIT
 const supabaseUrl = 'YOUR_PROJECT_URL';
 const supabaseKey = 'YOUR_ANON_PUBLIC_KEY';
 const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
+// config
 const PADLET_ID = (window.CONFIG && CONFIG.PADLET_ID) || '';
 const PADLET_URL = (window.CONFIG && CONFIG.PADLET_URL) || '';
 const TEACHABLE_MACHINE_URL = (window.CONFIG && CONFIG.TEACHABLE_MACHINE_URL) || 'https://teachablemachine.withgoogle.com';
@@ -17,6 +18,66 @@ window.addEventListener('DOMContentLoaded', () => {
     if (padletIframe && PADLET_ID) padletIframe.src = `https://padlet.com/embed/${PADLET_ID}`;
     if (padletLink && PADLET_URL) padletLink.href = PADLET_URL;
     if (teachableLink && TEACHABLE_MACHINE_URL) teachableLink.href = TEACHABLE_MACHINE_URL;
+});
+
+// ----- PADLET-STYLE BOARD USING SUPABASE -----
+
+// Submit a new post
+async function submitPost() {
+    const content = document.getElementById('post-content').value;
+    const author = document.getElementById('post-author').value;
+    if (!content) {
+        showToast("Write something!", "error");
+        return;
+    }
+    await supabase.from('posts').insert([{ content, author }]);
+    document.getElementById('post-content').value = '';
+    document.getElementById('post-author').value = '';
+    loadPosts();
+}
+
+// Load all posts
+async function loadPosts() {
+    let { data: posts, error } = await supabase
+        .from('posts')
+        .select('*')
+        .order('created_at', { ascending: false });
+    const postsContainer = document.getElementById('posts-list');
+    if (!postsContainer) return;
+    postsContainer.innerHTML = '';
+    if (posts && posts.length > 0) {
+        posts.forEach(post => {
+            const el = document.createElement('div');
+            el.className = 'post-card';
+            el.innerHTML = `<b>${post.author || 'Anonymous'}:</b> ${post.content}<br><small>${new Date(post.created_at).toLocaleString()}</small>`;
+            postsContainer.appendChild(el);
+        });
+    } else {
+        postsContainer.innerHTML = '<p style="color: #999;">No posts yet.</p>';
+    }
+}
+
+// Real-time updates for posts
+if (supabase && supabase.channel) {
+    supabase
+        .channel('public:posts')
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'posts' }, payload => {
+            loadPosts();
+        })
+        .subscribe();
+}
+
+// Initial load when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    // Restore tab state (existing code)
+    let savedSection = sessionStorage.getItem('currentSection');
+    let completedSections = JSON.parse(sessionStorage.getItem('completedSections') || '[]');
+    NavigationModule.completedSections = completedSections;
+    if (savedSection && document.getElementById(savedSection)) {
+        showTab(savedSection);
+    }
+    // Padlet posts load
+    loadPosts();
 });
 
 // ----- Navigation State Management -----
@@ -50,15 +111,6 @@ function showTab(section) {
 function getCompletedSections() {
     return NavigationModule.completedSections;
 }
-document.addEventListener('DOMContentLoaded', function() {
-    // Restore tab
-    let savedSection = sessionStorage.getItem('currentSection');
-    let completedSections = JSON.parse(sessionStorage.getItem('completedSections') || '[]');
-    NavigationModule.completedSections = completedSections;
-    if (savedSection && document.getElementById(savedSection)) {
-        showTab(savedSection);
-    }
-});
 
 // ----- Navigation Module -----
 const NavigationModule = {
@@ -220,4 +272,3 @@ document.addEventListener('keydown', function(e) {
         document.body.classList.add('user-is-tabbing');
     }
 });
-
