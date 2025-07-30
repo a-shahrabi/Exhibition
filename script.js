@@ -1,8 +1,8 @@
 // ----- Config Values -----
 
 // SUPABASE INIT
-const supabaseUrl = 'YOUR_PROJECT_URL';
-const supabaseKey = 'YOUR_ANON_PUBLIC_KEY';
+const supabaseUrl = 'https://fwbihfghcaojndsfpluz.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ3YmloZmdoY2Fvam5kc2ZwbHV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM4MzM3ODgsImV4cCI6MjA2OTQwOTc4OH0.1HgGojQhMvm-8GwQy0Z6r1j10Jjjip1Pj53GGiK_IgE';
 const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 // config
