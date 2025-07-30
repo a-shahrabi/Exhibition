@@ -8,15 +8,6 @@
     <link rel="stylesheet" href="styles.css">
     <script src="config.js"></script>
 </head>
-
-<!--*-->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-<script>
-  const supabaseUrl = 'YOUR_PROJECT_URL';
-  const supabaseKey = 'YOUR_ANON_PUBLIC_KEY';
-  const supabase = supabase.createClient(supabaseUrl, supabaseKey);
-</script>
-
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="container" id="main-content">
@@ -27,15 +18,14 @@
             </div>
         </header>
 
-
-        <!--*-->
+        <!-- Padlet-style Board Section -->
         <div style="margin: 2em 0;">
             <input id="post-author" placeholder="Your name (optional)">
             <textarea id="post-content" placeholder="Share your thought..."></textarea>
             <button onclick="submitPost()">Post</button>
-          </div>
-          <div id="posts-list"></div>
-          
+        </div>
+        <div id="posts-list"></div>
+        
         <div class="section-progress">
             <div class="progress-dot active" data-section="intro"></div>
             <div class="progress-dot" data-section="examples"></div>
@@ -277,6 +267,9 @@
             </div>
         </section>
     </div>
+
+    <!-- Supabase CDN + your main JS file at the end -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script src="script.js"></script>
 </body>
 </html>
